@@ -17,7 +17,7 @@ function MainApp() {
       </p>
       <button
         type="submit"
-        style={{ backgroundColor: "rgb(82, 60, 192)" }}
+        style={{ backgroundColor: "rgba(138, 118, 237, 1)" }}
         onClick={() => navigate("/home")}
       >
         Let's go
