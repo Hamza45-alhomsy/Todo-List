@@ -1,147 +1,134 @@
+import { useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import {
   doCreateUserWithEmailAndPassword,
   doSignInWithGoogle,
-} from "../../firebase/auth"; ////
-import "./signUp.css"; ////
-import { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth"; ////
+} from "../../firebase/auth";
+import { useAuth } from "../../hooks/useAuth";
+import "./signUp.css";
 
 function SignUp() {
   const navigate = useNavigate();
-
   const { userSignedUp } = useAuth();
-  const [email, setEmail] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSigningUp, setIsSigningUp] = useState(false); ////
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isSigningInWithGoogle, setIsSigningInWithGoogle] = useState(false);
-  const onSubmit = async (e) => {
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    isSigningUp: false,
+    error: "",
+  });
+
+  const handleSignUp = async (e, method) => {
     e.preventDefault();
-    if (!isSigningUp) {
-      setIsSigningUp(true);
-      try {
-        await doCreateUserWithEmailAndPassword(email, password);
-        setIsSigningUp(false);
-        navigate("/home");
-      } catch (error) {
-        setErrorMessage(error.message);
-        setIsSigningUp(false); // ✅ Reset after failure
-      }
-    }
-  }; ////
-  const onGoogleSignIn = async (e) => {
-    e.preventDefault();
-    if (!isSigningUp) {
-      setIsSigningInWithGoogle(true);
-      try {
+    if (state.isSigningUp) return;
+
+    setState((prev) => ({ ...prev, isSigningUp: true, error: "" }));
+
+    try {
+      if (method === "email") {
+        await doCreateUserWithEmailAndPassword(state.email, state.password);
+      } else {
         await doSignInWithGoogle();
-        navigate("/home");
-      } catch (error) {
-        console.error("Google sign-in error:", error);
-        setErrorMessage(error.message);
       }
-      setIsSigningInWithGoogle(false);
+      navigate("/home");
+    } catch (error) {
+      setState((prev) => ({ ...prev, error: error.message }));
+    } finally {
+      setState((prev) => ({ ...prev, isSigningUp: false }));
     }
   };
-  const isPasswordMatching =
-    password === confirmPassword && confirmPassword !== "";
-  const isPasswordLongEnough = password.length >= 6;
+
+  const isValid = {
+    passwordMatch: state.password === state.confirmPassword,
+    passwordLength: state.password.length >= 6,
+  };
+
+  if (userSignedUp) return <Navigate to="/home" replace />;
+
   return (
-    <div className="sign-up-page-1">
-      {userSignedUp && <Navigate to={"/home"} replace={true} />}
-      <img
-        src="/images/checkmark-17.png"
-        className="checkmark-17"
-        alt="checkmark"
-      />
-      <div className="frame-16-14">
-        <p className="text-15">
-          Welcome to <strong>DO IT</strong>
-        </p>
-        <p className="text-16">create an account and Join us now!</p>
+    <div className="login-container">
+      <div className="login-header">
+        <h2>
+          <strong>Sign Up</strong>
+        </h2>
+        <p>Create an account and join us now!</p>
       </div>
-      <div className="input-group">
-        <div className="input-field">
+
+      <form onSubmit={(e) => handleSignUp(e, "email")}>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
           <input
-            placeholder="E-mail"
             type="email"
-            autoComplete="email"
-            required
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            id="email"
+            value={state.email}
+            onChange={(e) =>
+              setState((prev) => ({ ...prev, email: e.target.value }))
+            }
+            placeholder="Enter your email"
           />
         </div>
 
-        <div className="input-field">
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
           <input
             type="password"
-            autoComplete="current-password"
-            required
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              setErrorMessage("");
-            }}
-            placeholder="Password"
+            id="password"
+            value={state.password}
+            onChange={(e) =>
+              setState((prev) => ({ ...prev, password: e.target.value }))
+            }
+            placeholder="Create a password"
           />
         </div>
-        <div className="input-field">
+
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Confirm Password</label>
           <input
             type="password"
-            autoComplete="current-password"
-            required
-            value={confirmPassword}
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-              setErrorMessage("");
-              // if (password !== e.target.value)
-              // 	setErrorMessage("the password confirmation does not valid");
-            }}
-            placeholder="Password Confirmation"
+            id="confirmPassword"
+            value={state.confirmPassword}
+            onChange={(e) =>
+              setState((prev) => ({ ...prev, confirmPassword: e.target.value }))
+            }
+            placeholder="Confirm your password"
           />
         </div>
-      </div>
-      <div>
-        {password && <div>✓ Password must be at least 6 characters</div>}
-        {confirmPassword && <div>✓ Passwords must match</div>}
-      </div>
-      {errorMessage && (
-        <span className="text-red-600 font-bold">{errorMessage}</span>
-      )}
-      <div className="signin_button-5">
+
+        <div className="validation">
+          {state.password && <p>✓ Password must be at least 6 characters</p>}
+          {state.confirmPassword && <p>✓ Passwords must match</p>}
+        </div>
+
+        {state.error && <div className="error-message">{state.error}</div>}
+
         <button
-          onClick={onSubmit}
           type="submit"
-          className="rectangle-8-6 text-7"
-          disabled={isSigningUp || !isPasswordMatching || !isPasswordLongEnough}
+          className="login-btn"
+          disabled={
+            state.isSigningUp ||
+            !isValid.passwordMatch ||
+            !isValid.passwordLength
+          }
         >
-          {isSigningUp ? "Signing up..." : "Sign up"}
+          {state.isSigningUp ? "Signing up..." : "Sign up"}
         </button>
-      </div>
-      <p className="text-13">
-        <Link to={"/login"} className="hover:underline font-bold">
-          <span className="text-rgb-99-217-243">
-            Already have an account? Log in
-          </span>
-        </Link>
-      </p>
-      <div className="social-signup">
-        <p className="text-30">Sign Up with:</p>
-        <div className="social-icons">
-          <button
-            className="google-signup-btn"
-            onClick={onGoogleSignIn}
-            disabled={isSigningInWithGoogle}
-            type="button"
-          >
-            <img src="/images/google-29.svg" alt="Sign up with Google" />
-          </button>
+
+        <div className="auth-navigation">
+          Already have an account? <Link to="/login">Log in</Link>
         </div>
-      </div>
+
+        <div className="divider">
+          <span>OR</span>
+        </div>
+
+        <button
+          type="submit"
+          onClick={(e) => handleSignUp(e, "google")}
+          disabled={state.isSigningUp}
+        >
+          Continue with Google
+        </button>
+      </form>
     </div>
   );
 }

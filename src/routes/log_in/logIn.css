@@ -1,4 +1,122 @@
 /* Add font files for Darumadrop One */
+.login-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-header h2 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.error-message {
+  color: #e53935;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+.login-btn,
+.google-btn {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.login-btn {
+  background-color: #0ea5e9;
+  color: white;
+}
+
+.login-btn:hover {
+  background-color: #0a8abc;
+}
+
+.google-btn {
+  background-color: white;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.google-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.auth-navigation {
+  text-align: center;
+  margin: 1rem 0;
+  color: #666;
+}
+
+.auth-navigation a {
+  color: #0ea5e9;
+  text-decoration: none;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #ddd;
+}
+
+.divider span {
+  padding: 0 1rem;
+  color: #666;
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .login-header h2 {
+    font-size: 1.3rem;
+  }
+}
 @font-face {
   font-family: "Darumadrop One";
   src:

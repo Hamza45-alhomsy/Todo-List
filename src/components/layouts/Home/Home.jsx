@@ -1,12 +1,12 @@
 import "./home.css";
+////
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import useAuth from "../../../hooks/useAuth.jsx";
 import AddTask from "../../lists/AddTask.jsx";
 import TodoList from "../../lists/TodoList.jsx";
 import TotalCompleteItems from "../../lists/TotalCompleteItems.jsx";
-import { useNavigate } from "react-router";
-import useAuth from "../../../hooks/useAuth.jsx";
-////
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useState, useEffect } from "react";
 
 ////
 function Home() {
@@ -37,7 +37,7 @@ function Home() {
     return <p style={{ fontSize: 25 }}>Please log in to add your tasks ! </p>;
 
   return (
-    <div className="home-page">
+    <div style={{ margin: 10, display: "flex" }} className="home-page">
       <div>
         {userInfo.photoURL && (
           <img

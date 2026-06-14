@@ -65,6 +65,12 @@ export const doSignInWithGoogle = async () => {
     throw new Error(error.message);
   }
 };
+// Sign Out
+export const doSignOut = async () => {
+  const result = await auth.signOut();
+
+  return result;
+}; ////
 
 // Handle redirect result (call this when your app loads)
 // export const handleRedirectResult = async () => {
@@ -91,13 +97,5 @@ export const doSignInWithGoogle = async () => {
 //     return null;
 //   }
 // };
-
-// Sign Out
-
-export const doSignOut = async () => {
-  const result = await auth.signOut();
-
-  return result;
-}; ////
 
 // Get current user (useful for checking auth state)

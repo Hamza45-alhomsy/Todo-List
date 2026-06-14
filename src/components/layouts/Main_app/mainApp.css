@@ -25,12 +25,15 @@
 }
 
 body {
-  display: flex;
-  justify-content: center; /* horizontal center */
-  align-items: center; /* vertical center */
-  height: 100vh; /* full screen height */
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
   margin: 0;
-  background-color: rgb(102, 68, 255);
+  background: linear-gradient(
+    180deg,
+    rgb(102, 68, 255) 0%,
+    rgb(74, 48, 207) 100%
+  );
 }
 
 img {
@@ -97,7 +100,8 @@ img {
 
 /* Center the main content (checkmark + text) in the middle of the viewport */
 .app-1 {
-  min-height: 100vh;
+  min-height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center; /* vertical centering */
@@ -105,6 +109,9 @@ img {
   gap: 12px;
   padding-left: 24px;
   padding-right: 24px;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  text-align: center;
 }
 
 /* Make the checkmark a reasonable fixed size and ensure it centers */

@@ -1,8 +1,8 @@
-import { useDispatch } from "react-redux";
-import { deleteTodoAsync, updateTodoAsync } from "../../redux/slices/todoSlice";
-import { useAuth } from "../../hooks/useAuth";
-import { deleteToDo, updateToDo } from "./helpers";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useAuth } from "../../hooks/useAuth";
+import { deleteTodoAsync, updateTodoAsync } from "../../redux/slices/todoSlice";
+import { deleteToDo, updateToDo } from "./helpers";
 import "./todolist.css";
 // eslint-disable-next-line react/prop-types
 const TodoItem = ({ id, title, completed }) => {
@@ -72,6 +72,7 @@ const TodoItem = ({ id, title, completed }) => {
           </span>
         </div>
         <button
+          type="button"
           className="btn btn-danger btn-sm ms-2"
           onClick={handleDeleteClick}
           aria-label={`Delete todo: ${title}`}

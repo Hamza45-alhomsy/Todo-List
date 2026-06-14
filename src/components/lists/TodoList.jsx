@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useAuth } from "../../hooks/useAuth"; // Fixed import
 import { getTodosAsync } from "../../redux/slices/todoSlice";
 import TodoItem from "./TodoItem";
-import { useAuth } from "../../hooks/useAuth"; // Fixed import
 import "./todolist.css";
 const TodoList = ({ children }) => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const TodoList = ({ children }) => {
   if (loading) {
     return (
       <div className="alert alert-info text-center">
-        <div className="loader" role="status"></div>
+        <div className="loader"></div>
         Loading your tasks...
       </div>
     );
@@ -67,9 +67,9 @@ const TodoList = ({ children }) => {
             completed={todo.completed}
           />
         ))}
+        {children}
       </ul>
       <br />
-      {children}
     </div>
   );
 };

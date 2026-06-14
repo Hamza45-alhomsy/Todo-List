@@ -2,6 +2,7 @@ import "./mainApp.css";
 import { useNavigate } from "react-router";
 import checkmark from "/images/checkmark.png";
 import useAuth from "../../../hooks/useAuth";
+
 function MainApp() {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
@@ -16,7 +17,7 @@ function MainApp() {
       </p>
       <button
         type="submit"
-        style={{ backgroundColor: " rgba(138, 118, 237, 1)" }}
+        style={{ backgroundColor: "rgb(82, 60, 192)" }}
         onClick={() => navigate("/home")}
       >
         Let's go
