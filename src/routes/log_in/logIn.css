@@ -1,4 +1,5 @@
 /* Add font files for Darumadrop One */
+
 .login-container {
   max-width: 400px;
   margin: 2rem auto;
@@ -72,6 +73,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  color: rgb(255, 255, 255);
 }
 
 .google-btn:hover {

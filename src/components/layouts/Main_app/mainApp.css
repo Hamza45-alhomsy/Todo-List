@@ -95,7 +95,6 @@ img {
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
-  border-radius: 10px;
 }
 
 /* Center the main content (checkmark + text) in the middle of the viewport */

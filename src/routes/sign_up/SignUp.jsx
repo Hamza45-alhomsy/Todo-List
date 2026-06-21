@@ -46,9 +46,9 @@ function SignUp() {
   if (userSignedUp) return <Navigate to="/home" replace />;
 
   return (
-    <div className="login-container">
+    <div className="login-container" style={{ backgroundColor: "#0077b6" }}>
       <div className="login-header">
-        <h2>
+        <h2 style={{ color: "white" }}>
           <strong>Sign Up</strong>
         </h2>
         <p>Create an account and join us now!</p>
@@ -95,8 +95,14 @@ function SignUp() {
         </div>
 
         <div className="validation">
-          {state.password && <p>✓ Password must be at least 6 characters</p>}
-          {state.confirmPassword && <p>✓ Passwords must match</p>}
+          {state.password && (
+            <p style={{ color: "white" }}>
+              Password must be at least 6 characters
+            </p>
+          )}
+          {state.confirmPassword && (
+            <p style={{ color: "white" }}> Passwords must match</p>
+          )}
         </div>
 
         {state.error && <div className="error-message">{state.error}</div>}
@@ -125,6 +131,7 @@ function SignUp() {
           type="submit"
           onClick={(e) => handleSignUp(e, "google")}
           disabled={state.isSigningUp}
+          style={{ color: "white" }}
         >
           Continue with Google
         </button>

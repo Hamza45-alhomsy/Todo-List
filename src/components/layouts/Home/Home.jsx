@@ -34,7 +34,11 @@ function Home() {
   }, []);
 
   if (!userInfo)
-    return <p style={{ fontSize: 25 }}>Please log in to add your tasks ! </p>;
+    return (
+      <div style={{ fontSize: 25, minHeight: "600px" }}>
+        Please log in to add your tasks !{" "}
+      </div>
+    );
 
   return (
     <div style={{ margin: 10, display: "flex" }} className="home-page">
@@ -53,7 +57,7 @@ function Home() {
             {" "}
             <button
               type="submit"
-              style={{ backgroundColor: " rgba(138, 118, 237, 1)" }}
+              style={{ backgroundColor: " #90e0ef" }}
               onClick={() => navigate("/signout")}
             >
               Sign_out

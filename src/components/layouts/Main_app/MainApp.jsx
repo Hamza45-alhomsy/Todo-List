@@ -7,7 +7,7 @@ function MainApp() {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   return (
-    <div className="app-1">
+    <div className="app-1" style={{ backgroundColor: "#00b4d8" }}>
       <img src={checkmark} className="checkmark-2" alt="checkmark" />
       <p className="text-3">
         <span className="text-white">DO IT</span>
@@ -17,7 +17,7 @@ function MainApp() {
       </p>
       <button
         type="submit"
-        style={{ backgroundColor: "rgba(138, 118, 237, 1)" }}
+        style={{ backgroundColor: "#90e0ef" }}
         onClick={() => navigate("/home")}
       >
         Let's go
@@ -25,7 +25,7 @@ function MainApp() {
       {!currentUser && (
         <button
           type="submit"
-          style={{ backgroundColor: " rgba(138, 118, 237, 1)" }}
+          style={{ backgroundColor: " #90e0ef" }}
           onClick={() => navigate("/signup")}
         >
           Sign up
@@ -34,7 +34,7 @@ function MainApp() {
       {!currentUser && (
         <button
           type="submit"
-          style={{ backgroundColor: " rgba(138, 118, 237, 1)" }}
+          style={{ backgroundColor: " #90e0ef" }}
           onClick={() => navigate("/login")}
         >
           Log in

@@ -38,9 +38,9 @@ function LogIn() {
   if (userLoggedIn) return <Navigate to="/home" replace />;
 
   return (
-    <div className="login-container">
+    <div className="login-container" style={{ backgroundColor: "#0077b6" }}>
       <div className="login-header">
-        <h2>Log in</h2>
+        <h2 style={{ color: "white" }}>Log in</h2>
       </div>
 
       <div className="login-form">
@@ -96,6 +96,7 @@ function LogIn() {
           type="button"
           onClick={() => handleSignIn("google")}
           disabled={state.isSigningIn}
+          style={{ color: "white" }}
         >
           Continue with Google
         </button>
